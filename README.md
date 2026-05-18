@@ -1,59 +1,42 @@
-# Programacion4SalaJuegos
+# Sala de Juegos 🎮
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Proyecto realizado para Programación IV.
 
-## Development server
+## 👤 Alumno
 
-To start a local development server, run:
+* Jorge Ezequiel Caballero
 
-```bash
-ng serve
-```
+## 🚀 Deploy
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+https://programacion4-sala-juego.vercel.app
 
-## Code scaffolding
+## 🛠️ Tecnologías utilizadas
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+* Angular
+* TypeScript
+* Bootstrap
+* HTML
+* CSS
+* Vercel
 
-```bash
-ng generate component component-name
-```
+## 📌 Sprint #1
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Funcionalidades implementadas:
 
-```bash
-ng generate --help
-```
+* Componente Home/Bienvenida
+* Componente Login
+* Componente Registro
+* Componente Quién Soy
+* Navegación entre componentes
+* Consumo de API pública de GitHub
+* Mostrar información del perfil de GitHub
+* Deploy en Vercel
+* Favicon personalizado
 
-## Building
+## 🎯 Juego Propio
 
-To build the project run:
+El juego elegido será un juego inspirado en Wordle, donde el usuario deberá adivinar una palabra secreta en una cantidad limitada de intentos. El sistema indicará letras correctas y letras mal posicionadas.
 
-```bash
-ng build
-```
+## 🔗 API utilizada
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+https://api.github.com/users/shorsho21
