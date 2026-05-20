@@ -1,0 +1,88 @@
+<section class="auth-page d-flex justify-content-center align-items-center min-vh-100 px-3">
+  <div class="auth-card">
+    <h1 class="h3 text-center mb-4">Registro</h1>
+
+    <form [formGroup]="registroForm" (ngSubmit)="enviarDatos()">
+
+      <!--  NOMBRE -->
+      <div class="mb-3">
+        <input class="form-control" placeholder="Nombre" formControlName="nombre" />
+
+        @if (registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched) {
+          <div class="text-danger mt-1">El nombre es obligatorio</div>
+        }
+      </div>
+
+      <!--  APELLIDO -->
+      <div class="mb-3">
+        <input class="form-control" placeholder="Apellido" formControlName="apellido" />
+
+        @if (registroForm.get('apellido')?.invalid && registroForm.get('apellido')?.touched) {
+          <div class="text-danger mt-1">El apellido es obligatorio</div>
+        }
+      </div>
+
+      <!--  EMAIL -->
+      <div class="mb-3">
+        <input class="form-control" placeholder="Email" formControlName="email" />
+
+        @if (registroForm.get('email')?.invalid && registroForm.get('email')?.touched) {
+          <div class="text-danger mt-1">Email inválido</div>
+        }
+      </div>
+
+      <!--  EDAD -->
+      <div class="mb-3">
+        <input type="number" class="form-control" placeholder="Edad" formControlName="edad" />
+
+        @if (registroForm.get('edad')?.invalid && registroForm.get('edad')?.touched) {
+          <div class="text-danger mt-1">Edad inválida</div>
+        }
+      </div>
+
+      <!--  PASSWORD -->
+      <div class="mb-3">
+        <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" />
+
+        @if (registroForm.get('password')?.invalid && registroForm.get('password')?.touched) {
+          <div class="text-danger mt-1">Mínimo 6 caracteres</div>
+        }
+      </div>
+
+      <!--  BOTÓN -->
+      <button class="btn btn-dark w-100" type="submit">
+        Registrarse
+      </button>
+
+      <!--  ERROR GLOBAL -->
+      @if (registroForm.invalid && registroForm.touched) {
+        <div class="text-danger text-center mt-3">
+          Complete el formulario correctamente
+        </div>
+      }
+
+    </form>
+  </div>
+</section>
+
+<!--  BOOTSTRAP MODAL REAL (NO SE RENDERIZA, SOLO SE ACTIVA CON JS) -->
+<div class="modal fade" id="registroModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Aviso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        {{ modalMessage }}
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-dark" data-bs-dismiss="modal">OK</button>
+      </div>
+
+    </div>
+  </div>
+</div>

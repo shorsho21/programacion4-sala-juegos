@@ -1,0 +1,88 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*fondo gaming */
+  background: radial-gradient(circle at top, #1a1a2e, #0f0f1a 60%, #0a0a12);
+  padding: 2rem;
+}
+
+/*  card estilo glass + neón */
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+
+  padding: 2.5rem 2.25rem;
+
+  border-radius: 18px;
+
+  background: rgba(20, 20, 35, 0.85);
+  border: 1px solid rgba(123, 47, 247, 0.3);
+
+  box-shadow:
+    0 0 20px rgba(123, 47, 247, 0.25),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+
+  backdrop-filter: blur(12px);
+
+  color: #eaeaea;
+}
+
+/*  título neón */
+.auth-card h1 {
+  font-weight: 800;
+  color: #c77dff;
+  text-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
+}
+
+/* inputs */
+.auth-card .form-control {
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+
+  color: #ffffff;
+}
+
+/* placeholder */
+.auth-card .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* focus glow */
+.auth-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #9d4edd;
+  box-shadow: 0 0 12px rgba(157, 78, 221, 0.4);
+  color: #fff;
+}
+
+/* labels */
+.auth-card .form-label {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: #d1d1e0;
+  font-weight: 600;
+}
+
+/* spacing */
+.auth-card .mb-4 {
+  margin-bottom: 1.35rem !important;
+}
+
+/* botones estilo arcade */
+.auth-card .btn-dark {
+  background: linear-gradient(90deg, #7b2ff7, #9d4edd);
+  border: none;
+  border-radius: 12px;
+  transition: 0.2s ease;
+  box-shadow: 0 0 10px rgba(157, 78, 221, 0.3);
+}
+
+.auth-card .btn-dark:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 18px rgba(157, 78, 221, 0.5);
+}
