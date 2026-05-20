@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/header/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, HttpClientModule],
+  standalone: true,
+  imports: [NavbarComponent, RouterOutlet],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
