@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 
-// Guard
+// Guards
 import { guestGuard } from './guards/guest.guard';
 import { authGuard } from './guards/auth.guard';
+
 export const routes: Routes = [
 
   {
@@ -41,8 +42,7 @@ export const routes: Routes = [
       .then(m => m.QuienSoyComponent)
   },
 
-  // 🎮 Juegos (protegidos)
-
+  // 🎮 Juegos protegidos
   {
     path: 'ahorcado',
     loadComponent: () =>
@@ -64,6 +64,30 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/chat/chat')
       .then(m => m.ChatComponent),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'preguntados',
+    loadComponent: () =>
+      import('./components/preguntados/preguntados')
+      .then(m => m.PreguntadosComponent),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'wordle',
+    loadComponent: () =>
+      import('./components/wordle/wordle')
+      .then(m => m.Wordle),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'resultados',
+    loadComponent: () =>
+      import('./components/resultados/resultados')
+      .then(m => m.ResultadosComponent),
     canActivate: [authGuard]
   },
 

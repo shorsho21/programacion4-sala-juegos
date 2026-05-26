@@ -1,0 +1,100 @@
+<section class="wordle-container d-flex justify-content-center align-items-center min-vh-100">
+
+  <div class="wordle-card text-center">
+
+    
+
+    <h2 class="title mb-3">🟩 Wordle</h2>
+    <!-- 📖 DESCRIPCIÓN DEL JUEGO -->
+    <p class="description mb-3">
+      Juego de palabras inspirado en Wordle donde el jugador debe adivinar una palabra secreta en una cantidad limitada de intentos. El sistema informa qué letras son correctas y cuáles están mal posicionadas.
+    </p>
+
+    <!-- INTENTOS -->
+    <div class="mb-3">
+
+      @for (intento of intentos(); track intento) {
+
+        <div class="row-word">
+
+          @for (letra of intento.palabra.split(''); track $index) {
+
+            <span
+              class="letter-box"
+              [class.correcta]="intento.resultado[$index] === 'correcta'"
+              [class.presente]="intento.resultado[$index] === 'presente'"
+              [class.incorrecta]="intento.resultado[$index] === 'incorrecta'"
+            >
+              {{ letra }}
+            </span>
+
+          }
+
+        </div>
+
+      }
+
+    </div>
+
+    <!-- INTENTO ACTUAL -->
+    <div class="row-word mb-3">
+
+      @for (i of [0,1,2,3,4]; track i) {
+
+        <span class="letter-box current">
+          {{ intentoActual()[i] || '' }}
+        </span>
+
+      }
+
+    </div>
+
+    <!-- TECLADO -->
+    <div class="keyboard">
+
+      @for (letra of letras; track letra) {
+
+        <button class="key-btn" (click)="agregarLetra(letra)">
+          {{ letra }}
+        </button>
+
+      }
+
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="mt-3 d-flex gap-2 justify-content-center">
+
+      <button class="btn btn-warning" (click)="borrarLetra()">
+        ⬅ Borrar
+      </button>
+
+      <button class="btn btn-success" (click)="enviar()">
+        Enter
+      </button>
+
+      <button class="btn btn-danger" (click)="reiniciar()">
+        Reiniciar
+      </button>
+
+    </div>
+
+    <!-- FINAL -->
+    @if (juegoTerminado()) {
+
+      <div class="mt-3">
+
+        @if (gano()) {
+          <h4 class="text-success">🎉 Ganaste!</h4>
+        } @else {
+          <h4 class="text-danger">💀 Perdiste</h4>
+          <p>Palabra: {{ palabraSecreta() }}</p>
+        }
+
+      </div>
+
+    }
+
+  </div>
+
+</section>

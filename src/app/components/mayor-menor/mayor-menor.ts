@@ -15,333 +15,120 @@ import { supabase } from '../../supabase.client';
 
 export class MayorMenorComponent {
 
-  resultadosService=
-  inject(
-    ResultadosService
-  );
+  resultadosService = inject(ResultadosService);
+  authService = inject(AuthService);
+  api = inject(HttpClient);
 
-  authService=
-  inject(
-    AuthService
-  );
+  usuario: any = null;
 
-  api=
-  inject(
-    HttpClient
-  );
+  deckId = signal('');
+  cartaActual = signal<any>(null);
+  aciertos = signal(0);
+  terminado = signal(false);
 
+  // ⏱️ NUEVO: tiempo inicio
+  tiempoInicio = Date.now();
 
-  usuario:any=null;
-
-
-  deckId=
-  signal('');
-
-  cartaActual=
-  signal<any>(
-    null
-  );
-
-  aciertos=
-  signal(
-    0
-  );
-
-  terminado=
-  signal(
-    false
-  );
-
-
-  valores:any={
-
-    ACE:1,
-    "2":2,
-    "3":3,
-    "4":4,
-    "5":5,
-    "6":6,
-    "7":7,
-    "8":8,
-    "9":9,
-    "10":10,
-    JACK:11,
-    QUEEN:12,
-    KING:13
-
+  valores: any = {
+    ACE: 1,
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    JACK: 11,
+    QUEEN: 12,
+    KING: 13
   };
 
-
-  constructor(){
-
+  constructor() {
     this.cargarUsuario();
-
     this.iniciarJuego();
-
   }
 
+  async cargarUsuario() {
+    const { data } = await supabase.auth.getUser();
 
+    const email = data.user?.email;
 
-  async cargarUsuario(){
+    if (!email) return;
 
-    const {
-
-      data
-
-    }
-
-    =
-
-    await supabase
-    .auth
-    .getUser();
-
-
-    const email=
-
-    data.user?.email;
-
-
-    if(
-      !email
-    ){
-
-      return;
-
-    }
-
-
-    this.usuario=
-
-    await this
-    .authService
-    .getProfile(
-      email
-    );
-
+    this.usuario = await this.authService.getProfile(email);
   }
 
+  iniciarJuego() {
+    this.tiempoInicio = Date.now(); // ⏱️ reset tiempo
 
-
-  iniciarJuego(){
-
-    this.api
-
-    .get<any>(
-
+    this.api.get<any>(
       'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'
-
-    )
-
-    .subscribe(
-
-      data=>{
-
-        this.deckId.set(
-          data.deck_id
-        );
-
-        this.sacarCarta();
-
-      }
-
-    );
-
+    ).subscribe(data => {
+      this.deckId.set(data.deck_id);
+      this.sacarCarta();
+    });
   }
 
-
-
-  sacarCarta(){
-
-    this.api
-
-    .get<any>(
-
+  sacarCarta() {
+    this.api.get<any>(
       `https://deckofcardsapi.com/api/deck/${this.deckId()}/draw/?count=1`
-
-    )
-
-    .subscribe(
-
-      data=>{
-
-        this.cartaActual.set(
-
-          data.cards[0]
-
-        );
-
-      }
-
-    );
-
+    ).subscribe(data => {
+      this.cartaActual.set(data.cards[0]);
+    });
   }
 
+  elegir(eleccion: 'mayor' | 'menor') {
 
-
-  elegir(
-    eleccion:
-    'mayor'
-    |
-    'menor'
-  ){
-
-    this.api
-
-    .get<any>(
-
+    this.api.get<any>(
       `https://deckofcardsapi.com/api/deck/${this.deckId()}/draw/?count=1`
+    ).subscribe(data => {
 
-    )
+      const nuevaCarta = data.cards[0];
 
-    .subscribe(
+      const actual = this.valores[this.cartaActual().value];
+      const siguiente = this.valores[nuevaCarta.value];
 
-      data=>{
+      let acerto = false;
 
-        const nuevaCarta=
-        data.cards[0];
+      if (eleccion === 'mayor' && siguiente > actual) acerto = true;
+      if (eleccion === 'menor' && siguiente < actual) acerto = true;
 
-
-        const actual=
-
-        this.valores[
-          this.cartaActual().value
-        ];
-
-
-        const siguiente=
-
-        this.valores[
-          nuevaCarta.value
-        ];
-
-
-        let acerto=
-        false;
-
-
-        if(
-
-          eleccion==='mayor'
-
-          &&
-
-          siguiente>actual
-
-        ){
-
-          acerto=
-          true;
-
-        }
-
-
-        if(
-
-          eleccion==='menor'
-
-          &&
-
-          siguiente<actual
-
-        ){
-
-          acerto=
-          true;
-
-        }
-
-
-        if(
-          acerto
-        ){
-
-          this.aciertos.update(
-
-            x=>x+1
-
-          );
-
-          this.cartaActual.set(
-            nuevaCarta
-          );
-
-        }
-
-        else{
-
-          this.terminado.set(
-            true
-          );
-
-          this.guardarResultado();
-
-        }
-
+      if (acerto) {
+        this.aciertos.update(x => x + 1);
+        this.cartaActual.set(nuevaCarta);
+      } else {
+        this.terminado.set(true);
+        this.guardarResultado();
       }
-
-    );
-
-  }
-
-
-
-  async guardarResultado(){
-
-    if(
-      !this.usuario
-    ){
-
-      return;
-
-    }
-
-
-    await this
-    .resultadosService
-    .guardarResultado({
-
-      usuario:
-
-      this.usuario.nombre+
-
-      ' '+
-
-      this.usuario.apellido,
-
-
-      juego:
-
-      'Mayor-Menor',
-
-
-      puntaje:
-
-      this.aciertos(),
-
-
-      fecha:
-
-      new Date()
 
     });
 
   }
 
+  // ⏱️ NUEVO: calcular tiempo
+  tiempoFinal() {
+    return Math.floor((Date.now() - this.tiempoInicio) / 1000);
+  }
 
+  async guardarResultado() {
 
-  reiniciar(){
+    if (!this.usuario) return;
 
-    this.aciertos.set(
-      0
-    );
-
-    this.terminado.set(
-      false
-    );
-
-    this.iniciarJuego();
+    await this.resultadosService.guardarResultado({
+      usuario: this.usuario.nombre + ' ' + this.usuario.apellido,
+      juego: 'Mayor-Menor',
+      puntaje: this.aciertos(),
+      tiempo: this.tiempoFinal(), // ✅ AHORA SÍ
+      fecha: new Date()
+    });
 
   }
 
+  reiniciar() {
+    this.aciertos.set(0);
+    this.terminado.set(false);
+    this.iniciarJuego();
+  }
 }

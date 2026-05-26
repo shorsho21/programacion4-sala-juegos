@@ -1,42 +1,42 @@
-import { Component, inject, signal, effect } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-//defino componente
+import { Component, inject, signal, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive} from '@angular/router';
+//import { AuthService } from '../../services/auth.service';
+import { supabase } from '../../supabase.client';
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-//defino la clase
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
-  //inyecto el auth
-  private authService = inject(AuthService);
-  //defino un signal para el user
+  private router = inject(Router);
+
   user = signal<any>(null);
 
-  //error, no tengo que usar constructor, tengo que usar inject
-  constructor() {
-    //cargo el usuario
-    this.loadUser();
+  ngOnInit() {
 
-    // sincroniza con cambios del auth service
-    effect(() => {
-      const currentUser = this.authService.user?.();
-      this.user.set(currentUser);
+    // 🔥 estado inicial
+    this.refreshUser();
+
+    // 🔥 ESCUCHA REAL DE SUPABASE
+    supabase.auth.onAuthStateChange((_event, session) => {
+      this.user.set(session?.user ?? null);
     });
   }
 
-  async loadUser() {
-    const sessionUser = await this.authService.getUser();
-    this.user.set(sessionUser);
+  async refreshUser() {
+    const { data } = await supabase.auth.getUser();
+    this.user.set(data.user ?? null);
   }
 
   async logout() {
-    await this.authService.logout();
+    await supabase.auth.signOut();
+
     this.user.set(null);
+
+    this.router.navigate(['/home']);
   }
 }

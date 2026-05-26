@@ -1,55 +1,48 @@
-<header class="navbar navbar-expand-lg navbar-light shadow-sm border-bottom">
-  <div class="container">
+<header class="navbar-gamer">
 
-    <button class="navbar-toggler ms-auto" type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#mainNavbar"
-      aria-controls="mainNavbar"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
+  <div class="navbar-container">
 
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="nav-links">
 
-    <div class="collapse navbar-collapse justify-content-center" id="mainNavbar">
+      <a routerLink="/home"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }"
+         class="nav-btn">
+        Home
+      </a>
 
-      <div class="nav gap-3">
+      <a routerLink="/quien-soy"
+         routerLinkActive="active"
+         class="nav-btn">
+        Quién soy
+      </a>
 
-        <a routerLink="/home"
+      @if (!user()) {
+
+        <a routerLink="/login"
            routerLinkActive="active"
-           class="btn navbar-btn">
-          Home
+           class="nav-btn">
+          Login
         </a>
 
-        <a routerLink="/quien-soy"
+        <a routerLink="/registro"
            routerLinkActive="active"
-           class="btn navbar-btn">
-          Quién soy
+           class="nav-btn">
+          Registro
         </a>
 
-        @if (!user()) {
-          <a routerLink="/login"
-             routerLinkActive="active"
-             class="btn navbar-btn">
-            Login
-          </a>
+      }
 
-          <a routerLink="/registro"
-             routerLinkActive="active"
-             class="btn navbar-btn">
-            Registro
-          </a>
-        }
+      @if (user()) {
 
-        @if (user()) {
-          <button class="btn btn-outline-dark navbar-btn" (click)="logout()">
-            Logout
-          </button>
-        }
+        <button class="nav-btn logout" (click)="logout()">
+          Logout
+        </button>
 
-      </div>
+      }
 
     </div>
 
   </div>
+
 </header>

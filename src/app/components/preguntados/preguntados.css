@@ -1,0 +1,91 @@
+.preg-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: radial-gradient(circle at top, #1a1a2e, #0f0f1a 60%, #0a0a12);
+  color: #ffffff;
+  padding: 2rem;
+}
+
+/* tarjeta principal */
+.preg-card {
+  width: 100%;
+  max-width: 520px;
+
+  background: rgba(20, 20, 35, 0.88);
+  border: 1px solid rgba(120, 80, 255, 0.25);
+  border-radius: 18px;
+
+  padding: 2.5rem;
+
+  box-shadow:
+    0 0 25px rgba(120, 80, 255, 0.25),
+    0 20px 60px rgba(0, 0, 0, 0.6);
+
+  backdrop-filter: blur(10px);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.preg-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 35px rgba(120, 80, 255, 0.4),
+    0 25px 70px rgba(0, 0, 0, 0.7);
+}
+
+/* título */
+.title {
+  color: #c77dff;
+  text-shadow: 0 0 12px rgba(199, 125, 255, 0.4);
+}
+
+/* pregunta */
+.question {
+  font-size: 1.2rem;
+  color: #e6e6f0;
+  font-weight: 500;
+}
+
+/* botones de opciones */
+.option-btn {
+  background: rgba(30, 30, 50, 0.8);
+  border: 1px solid rgba(157, 78, 221, 0.3);
+  color: #ffffff;
+
+  border-radius: 12px;
+  padding: 0.8rem;
+
+  transition: 0.2s ease;
+}
+
+.option-btn:hover {
+  transform: scale(1.03);
+  background: linear-gradient(90deg, #7b2ff7, #9d4edd);
+  box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+}
+
+/* stats */
+.stats {
+  color: #d1d1e0;
+  margin-top: 1rem;
+}
+
+/* botón reinicio */
+.restart-btn {
+  background: linear-gradient(90deg, #7b2ff7, #9d4edd);
+  border: none;
+  color: white;
+  border-radius: 10px;
+
+  padding: 0.7rem 1.2rem;
+
+  transition: 0.2s ease;
+}
+
+.restart-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+}

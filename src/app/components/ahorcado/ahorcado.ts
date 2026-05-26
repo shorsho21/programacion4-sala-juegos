@@ -1,47 +1,23 @@
-import {
-  Component,
-  inject,
-  signal
-} from '@angular/core';
-
-import {
-  ResultadosService
-} from '../../services/resultados.service';
-
-import {
-  AuthService
-} from '../../services/auth.service';
-
-import {
-  supabase
-} from '../../supabase.client';
-
+import { Component, inject, signal } from '@angular/core';
+import { ResultadosService } from '../../services/resultados.service';
+import { AuthService } from '../../services/auth.service';
+import { supabase } from '../../supabase.client';
 
 @Component({
-  selector:'app-ahorcado',
-  standalone:true,
-  imports:[],
-  templateUrl:'./ahorcado.html',
-  styleUrl:'./ahorcado.css'
+  selector: 'app-ahorcado',
+  standalone: true,
+  imports: [],
+  templateUrl: './ahorcado.html',
+  styleUrl: './ahorcado.css'
 })
+export class AhorcadoComponent {
 
-export class AhorcadoComponent{
+  resultadosService = inject(ResultadosService);
+  authService = inject(AuthService);
 
-  resultadosService=
-  inject(
-    ResultadosService
-  );
+  usuario: any = null;
 
-  authService=
-  inject(
-    AuthService
-  );
-
-  usuario:any=null;
-
-
-  palabras=[
-
+  palabras = [
     'ANGULAR',
     'FIREBASE',
     'TYPESCRIPT',
@@ -51,402 +27,115 @@ export class AhorcadoComponent{
     'DESARROLLO',
     'SIGNALS',
     'SERVICIO'
-
   ];
 
+  abecedario = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
 
-  abecedario=
-  'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
-  .split('');
+  palabra = signal('');
+  letrasSeleccionadas = signal<string[]>([]);
+  errores = signal(0);
+  juegoTerminado = signal(false);
+  gano = signal(false);
 
+  tiempoInicio = Date.now();
 
-  palabra=
-  signal('');
-
-
-  letrasSeleccionadas=
-  signal<string[]>([]);
-
-
-  errores=
-  signal(0);
-
-
-  juegoTerminado=
-  signal(false);
-
-
-  gano=
-  signal(false);
-
-
-  tiempoInicio=
-  Date.now();
-
-
-  constructor(){
-
+  constructor() {
     this.cargarUsuario();
-
     this.iniciarJuego();
-
   }
 
+  async cargarUsuario() {
+    const { data } = await supabase.auth.getUser();
 
-  async cargarUsuario(){
+    const email = data.user?.email;
+    if (!email) return;
 
-    const { data }=
-
-    await supabase
-    .auth
-    .getUser();
-
-
-    const email=
-    data.user?.email;
-
-
-    if(
-      !email
-    ){
-
-      return;
-
-    }
-
-
-    this.usuario=
-
-    await this
-    .authService
-    .getProfile(
-      email
-    );
-
+    this.usuario = await this.authService.getProfile(email);
   }
 
-
-  iniciarJuego(){
-
-    const aleatoria=
-
-    this.palabras[
-
-      Math.floor(
-
-        Math.random()
-
-        *
-
-        this.palabras.length
-
-      )
-
-    ];
-
-
+  iniciarJuego() {
     this.palabra.set(
-      aleatoria
+      this.palabras[
+        Math.floor(Math.random() * this.palabras.length)
+      ]
     );
 
     this.letrasSeleccionadas.set([]);
-
     this.errores.set(0);
-
     this.gano.set(false);
-
     this.juegoTerminado.set(false);
 
-    this.tiempoInicio=
-    Date.now();
-
+    this.tiempoInicio = Date.now();
   }
 
+  seleccionarLetra(letra: string) {
 
+    if (this.juegoTerminado()) return;
+    if (this.letrasSeleccionadas().includes(letra)) return;
 
-  seleccionarLetra(
-    letra:string
-  ){
+    this.letrasSeleccionadas.update(l => [...l, letra]);
 
-    if(
-      this.juegoTerminado()
-    ){
-
-      return;
-
+    if (!this.palabra().includes(letra)) {
+      this.errores.update(e => e + 1);
     }
 
-
-    if(
-
-      this
-      .letrasSeleccionadas()
-      .includes(
-        letra
-      )
-
-    ){
-
-      return;
-
-    }
-
-
-    this
-    .letrasSeleccionadas
-    .update(
-
-      letras=>
-      [
-
-        ...letras,
-        letra
-
-      ]
-
-    );
-
-
-    if(
-
-      !this
-      .palabra()
-      .includes(
-        letra
-      )
-
-    ){
-
-      this
-      .errores
-      .update(
-
-        e=>e+1
-
-      );
-
-    }
-
-
-    this
-    .verificarEstado();
-
+    this.verificarEstado();
   }
 
+  verificarEstado() {
 
+    const gano = this.palabra()
+      .split('')
+      .every(l => this.letrasSeleccionadas().includes(l));
 
-  verificarEstado(){
-
-    const gano=
-
-    this
-    .palabra()
-
-    .split('')
-
-    .every(
-
-      letra=>
-
-      this
-      .letrasSeleccionadas()
-      .includes(
-        letra
-      )
-
-    );
-
-
-    if(
-      gano
-    ){
-
-      this.gano.set(
-        true
-      );
-
-      this.juegoTerminado.set(
-        true
-      );
-
+    if (gano) {
+      this.gano.set(true);
+      this.juegoTerminado.set(true);
       this.guardarResultado();
-
+      return;
     }
 
-    else if(
-
-      this.errores()
-
-      >=
-
-      6
-
-    ){
-
-      this.gano.set(
-        false
-      );
-
-      this.juegoTerminado.set(
-        true
-      );
-
+    if (this.errores() >= 6) {
+      this.gano.set(false);
+      this.juegoTerminado.set(true);
       this.guardarResultado();
-
     }
-
   }
 
+  tiempoFinal() {
+    return Math.floor((Date.now() - this.tiempoInicio) / 1000);
+  }
 
+  async guardarResultado() {
 
-  async guardarResultado(){
+    if (!this.usuario) return;
 
-    if(
-      !this.usuario
-    ){
+    let puntaje = 0;
 
-      return;
-
+    if (this.gano()) {
+      puntaje = Math.max(
+        0,
+        100 - (this.errores() * 10) - this.tiempoFinal()
+      );
     }
 
-
-    let puntaje=0;
-
-
-    if(
-      this.gano()
-    ){
-
-      puntaje=
-
-      (
-
-        100
-
-        -
-
-        (
-
-          this.errores()
-
-          *
-
-          10
-
-        )
-
-      )
-
-      -
-
-      this.tiempoFinal();
-
-    }
-
-
-    await this
-    .resultadosService
-    .guardarResultado({
-
-      usuario:
-
-      this.usuario.nombre+
-
-      ' '+
-
-      this.usuario.apellido,
-
-
-      juego:
-
-      'Ahorcado',
-
-
-      puntaje:
-
-      puntaje,
-
-
-      tiempo:
-
-      this.tiempoFinal(),
-
-
-      errores:
-
-      this.errores(),
-
-
-      cantidadletras:
-
-      this
-      .letrasSeleccionadas()
-      .length,
-
-
-      fecha:
-
-      new Date()
-
+    await this.resultadosService.guardarResultado({
+      usuario: this.usuario.nombre + ' ' + this.usuario.apellido,
+      juego: 'Ahorcado',
+      puntaje: puntaje,
+      tiempo: this.tiempoFinal(),
+      errores: this.errores(),
+      cantidad_letras: this.letrasSeleccionadas().length, // ✅ FIX CLAVE
+      fecha: new Date()
     });
-
   }
 
-
-
-  obtenerPalabraVisible(){
-
-    return this
-    .palabra()
-
-    .split('')
-
-    .map(
-
-      letra=>
-
-      this
-      .letrasSeleccionadas()
-      .includes(
-        letra
+  obtenerPalabraVisible() {
+    return this.palabra()
+      .split('')
+      .map(l =>
+        this.letrasSeleccionadas().includes(l) ? l : '_'
       )
-
-      ?
-
-      letra
-
-      :
-
-      '_'
-
-    )
-
-    .join(' ');
-
+      .join(' ');
   }
-
-
-
-  tiempoFinal(){
-
-    return Math.floor(
-
-      (
-
-        Date.now()
-
-        -
-
-        this.tiempoInicio
-
-      )
-
-      /
-
-      1000
-
-    );
-
-  }
-
 }
