@@ -1,0 +1,98 @@
+<div class="mayor-container">
+
+    <div class="mayor-card text-center">
+
+        <h1 class="titulo mb-4">
+
+            🃏 Mayor o Menor
+
+        </h1>
+
+        <p class="puntaje mb-4">
+
+            Aciertos:
+
+            <span class="badge-puntos">
+
+                {{aciertos()}}
+
+            </span>
+
+        </p>
+
+        @if(cartaActual()){
+
+            <div class="contenedor-carta">
+
+                <img
+                [src]="cartaActual().image"
+                class="carta-img"
+                alt="Carta actual"
+                >
+
+            </div>
+
+            <div class="mt-4">
+
+                @if(!terminado()){
+
+                    <button
+                    class="btn btn-mayor me-3"
+                    (click)="elegir('mayor')">
+
+                    ↑ Mayor
+
+                    </button>
+
+
+                    <button
+                    class="btn btn-menor"
+                    (click)="elegir('menor')">
+
+                    ↓ Menor
+
+                    </button>
+
+                }
+
+                @if(terminado()){
+
+                    <div class="mt-4">
+
+                        <h2 class="game-over">
+
+                            💀 Fin del juego
+
+                        </h2>
+
+                        <p class="mt-3">
+
+                            Tu puntaje fue:
+
+                            <strong>
+
+                                {{aciertos()}}
+
+                            </strong>
+
+                        </p>
+
+                        <button
+                        class="btn btn-success mt-3 px-4"
+                        (click)="reiniciar()">
+
+                        🔄 Jugar otra vez
+
+                        </button>
+
+                    </div>
+
+                }
+
+            </div>
+
+        }
+
+    </div>
+
+</div>

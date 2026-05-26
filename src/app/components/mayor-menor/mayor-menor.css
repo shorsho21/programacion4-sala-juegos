@@ -1,0 +1,256 @@
+.mayor-container {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2rem;
+
+  background:
+  radial-gradient(
+    circle at top,
+    #1a1a2e,
+    #0f0f1a 60%,
+    #0a0a12
+  );
+
+  color:white;
+}
+
+
+.mayor-card{
+
+  width:100%;
+  max-width:550px;
+
+  padding:2rem;
+
+  border-radius:20px;
+
+  background:rgba(
+    20,
+    20,
+    35,
+    .88
+  );
+
+  border:1px solid
+  rgba(
+    120,
+    80,
+    255,
+    .25
+  );
+
+  backdrop-filter:blur(
+    12px
+  );
+
+  box-shadow:
+  0 0 25px
+  rgba(
+    120,
+    80,
+    255,
+    .25
+  ),
+
+  0 25px 60px
+  rgba(
+    0,
+    0,
+    0,
+    .6
+  );
+
+  transition:.3s;
+}
+
+
+.mayor-card:hover{
+
+  transform:
+  translateY(-5px);
+
+  box-shadow:
+
+  0 0 35px
+  rgba(
+    120,
+    80,
+    255,
+    .4
+  ),
+
+  0 30px 70px
+  rgba(
+    0,
+    0,
+    0,
+    .7
+  );
+
+}
+
+
+.titulo{
+
+  color:#c77dff;
+
+  text-shadow:
+
+  0 0 10px
+  rgba(
+    199,
+    125,
+    255,
+    .5
+  );
+
+}
+
+
+.puntaje{
+
+  color:#d1d1e0;
+}
+
+
+.badge-puntos{
+
+  background:
+  linear-gradient(
+    90deg,
+    #7b2ff7,
+    #9d4edd
+  );
+
+  font-size:1rem;
+
+  padding:.6rem 1rem;
+
+  border-radius:12px;
+
+}
+
+
+.contenedor-carta{
+
+  min-height:320px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+}
+
+
+.carta-img{
+
+  width:180px;
+
+  border-radius:15px;
+
+  transition:.3s;
+
+  filter:
+
+  drop-shadow(
+    0 0 15px
+    rgba(
+      123,
+      47,
+      247,
+      .4
+    )
+  );
+
+}
+
+
+.carta-img:hover{
+
+  transform:
+
+  scale(1.08)
+  rotate(3deg);
+
+}
+
+
+.btn-mayor{
+
+  background:
+  linear-gradient(
+    90deg,
+    #7b2ff7,
+    #9d4edd
+  );
+
+  border:none;
+
+  color:white;
+
+  border-radius:12px;
+
+  min-width:130px;
+
+}
+
+
+.btn-menor{
+
+  background:
+  linear-gradient(
+    90deg,
+    #ff006e,
+    #ff4d6d
+  );
+
+  border:none;
+
+  color:white;
+
+  border-radius:12px;
+
+  min-width:130px;
+
+}
+
+
+.btn-mayor:hover,
+.btn-menor:hover{
+
+  transform:scale(1.05);
+
+  box-shadow:
+
+  0 0 20px
+  rgba(
+    157,
+    78,
+    221,
+    .5
+  );
+
+}
+
+
+.game-over{
+
+  color:#ff4d6d;
+
+  text-shadow:
+
+  0 0 15px
+  rgba(
+    255,
+    77,
+    109,
+    .5
+  );
+
+}

@@ -1,29 +1,75 @@
 import { Routes } from '@angular/router';
-import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegistroComponent } from './components/registro/registro.component';
-import { QuienSoyComponent } from './components/quien-soy/quien-soy.component';
-//aca estoy importando el guard para proteger las rutas login y registro
+
+// Guard
 import { guestGuard } from './guards/guest.guard';
-
+import { authGuard } from './guards/auth.guard';
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-  { path: 'home', component: BienvenidaComponent },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./components/bienvenida/bienvenida.component')
+      .then(m => m.BienvenidaComponent)
+  },
 
   {
     path: 'login',
-    component: LoginComponent,
-    canActivate: [guestGuard], // Estoy implementando el guard aca
+    loadComponent: () =>
+      import('./components/login/login.component')
+      .then(m => m.LoginComponent),
+    canActivate: [guestGuard]
   },
 
   {
     path: 'registro',
-    component: RegistroComponent,
-    canActivate: [guestGuard], // Estoy implementando el guard aca
+    loadComponent: () =>
+      import('./components/registro/registro.component')
+      .then(m => m.RegistroComponent),
+    canActivate: [guestGuard]
   },
 
-  { path: 'quien-soy', component: QuienSoyComponent },
+  {
+    path: 'quien-soy',
+    loadComponent: () =>
+      import('./components/quien-soy/quien-soy.component')
+      .then(m => m.QuienSoyComponent)
+  },
 
-  { path: '**', redirectTo: 'home' },
+  // 🎮 Juegos (protegidos)
+
+  {
+    path: 'ahorcado',
+    loadComponent: () =>
+      import('./components/ahorcado/ahorcado')
+      .then(m => m.AhorcadoComponent),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'mayor-menor',
+    loadComponent: () =>
+      import('./components/mayor-menor/mayor-menor')
+      .then(m => m.MayorMenorComponent),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'chat',
+    loadComponent: () =>
+      import('./components/chat/chat')
+      .then(m => m.ChatComponent),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: '**',
+    redirectTo: 'home'
+  }
+
 ];

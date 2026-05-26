@@ -1,0 +1,136 @@
+<div class="ahorcado-container">
+
+    <div class="ahorcado-card text-center">
+
+        <h1 class="titulo mb-4">
+
+            🪢 Ahorcado
+
+        </h1>
+
+        <p class="errores-texto">
+
+            Errores:
+
+            <span class="badge-errores">
+
+                {{errores()}} / 6
+
+            </span>
+
+        </p>
+
+
+        <div class="palabra-container">
+
+            <h2 class="palabra">
+
+                {{obtenerPalabraVisible()}}
+
+            </h2>
+
+        </div>
+
+
+        <div class="teclado mt-4">
+
+            @for(
+            letra of abecedario;
+            track letra
+            ){
+
+            <button
+
+            class="btn letra-btn"
+
+            [disabled]="
+            letrasSeleccionadas()
+            .includes(letra)
+            "
+
+            (click)="
+            seleccionarLetra(
+            letra
+            )
+            ">
+
+            {{letra}}
+
+            </button>
+
+            }
+
+        </div>
+
+
+        @if(
+        juegoTerminado()
+        ){
+
+        <div class="mt-4 resultado-panel">
+
+            @if(
+            gano()
+            ){
+
+            <h2 class="victoria">
+
+                🎉 Ganaste
+
+            </h2>
+
+            }
+
+            @else{
+
+            <h2 class="derrota">
+
+                💀 Perdiste
+
+            </h2>
+
+            <p>
+
+                La palabra era:
+
+                <strong>
+
+                    {{palabra()}}
+
+                </strong>
+
+            </p>
+
+            }
+
+            <p>
+
+                ⏱ Tiempo:
+
+                {{tiempoFinal()}} segundos
+
+            </p>
+
+            <p>
+
+                🔠 Letras usadas:
+
+                {{letrasSeleccionadas().length}}
+
+            </p>
+
+            <button
+            class="btn btn-reiniciar mt-3"
+            (click)="iniciarJuego()">
+
+            🔄 Jugar otra vez
+
+            </button>
+
+        </div>
+
+        }
+
+    </div>
+
+</div>

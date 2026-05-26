@@ -1,0 +1,277 @@
+.ahorcado-container{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:2rem;
+
+    background:
+    radial-gradient(
+    circle at top,
+    #1a1a2e,
+    #0f0f1a 60%,
+    #0a0a12
+    );
+
+    color:white;
+
+}
+
+
+.ahorcado-card{
+
+    width:100%;
+    max-width:700px;
+
+    padding:2rem;
+
+    border-radius:20px;
+
+    background:
+    rgba(
+    20,
+    20,
+    35,
+    .88
+    );
+
+    border:
+    1px solid
+    rgba(
+    120,
+    80,
+    255,
+    .25
+    );
+
+    backdrop-filter:
+    blur(12px);
+
+    box-shadow:
+
+    0 0 25px
+    rgba(
+    120,
+    80,
+    255,
+    .25
+    ),
+
+    0 25px 60px
+    rgba(
+    0,
+    0,
+    0,
+    .6
+    );
+
+}
+
+
+.titulo{
+
+    color:#c77dff;
+
+    text-shadow:
+
+    0 0 12px
+    rgba(
+    199,
+    125,
+    255,
+    .5
+    );
+
+}
+
+
+.errores-texto{
+
+    font-size:1.1rem;
+
+    color:#d1d1e0;
+
+}
+
+
+.badge-errores{
+
+    padding:.5rem 1rem;
+
+    border-radius:12px;
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #ff006e,
+    #ff4d6d
+    );
+
+}
+
+
+.palabra-container{
+
+    margin-top:2rem;
+
+    padding:1rem;
+
+}
+
+
+.palabra{
+
+    letter-spacing:10px;
+
+    font-size:2rem;
+
+    color:#ffffff;
+
+    text-shadow:
+
+    0 0 10px
+    rgba(
+    123,
+    47,
+    247,
+    .5
+    );
+
+}
+
+
+.teclado{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:10px;
+
+}
+
+
+.letra-btn{
+
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #7b2ff7,
+    #9d4edd
+    );
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+
+.letra-btn:hover:not(:disabled){
+
+    transform:
+    scale(1.08);
+
+    box-shadow:
+
+    0 0 15px
+    rgba(
+    157,
+    78,
+    221,
+    .6
+    );
+
+}
+
+
+.letra-btn:disabled{
+
+    opacity:.4;
+
+}
+
+
+.resultado-panel{
+
+    margin-top:2rem;
+
+}
+
+
+.victoria{
+
+    color:#52ff8f;
+
+    text-shadow:
+
+    0 0 15px
+    rgba(
+    82,
+    255,
+    143,
+    .5
+    );
+
+}
+
+
+.derrota{
+
+    color:#ff4d6d;
+
+    text-shadow:
+
+    0 0 15px
+    rgba(
+    255,
+    77,
+    109,
+    .5
+    );
+
+}
+
+
+.btn-reiniciar{
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #7b2ff7,
+    #9d4edd
+    );
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:.7rem 1.5rem;
+
+}
+
+
+.btn-reiniciar:hover{
+
+    transform:scale(1.05);
+
+}
