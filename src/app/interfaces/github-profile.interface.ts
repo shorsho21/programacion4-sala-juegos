@@ -1,3 +1,4 @@
+//definicion de la estructura del perfil de github que se usa con authservice.
 export interface GitHubProfile {
   login: string;
   name: string | null;

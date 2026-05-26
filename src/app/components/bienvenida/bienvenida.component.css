@@ -4,13 +4,13 @@
   justify-content: center;
   align-items: center;
 
-  /* 🎮 fondo tipo gaming lounge */
+  /* fondo tipo gaming */
   background: radial-gradient(circle at top, #1a1a2e, #0f0f1a 60%, #0a0a12);
   color: #ffffff;
   padding: 2rem;
 }
 
-/* 🧊 tarjeta estilo “arcade panel” */
+/* tarjeta estilo “arcade panel” */
 .home-card {
   width: 100%;
   max-width: 460px;
@@ -30,7 +30,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ✨ efecto hover gamer */
+/* efecto hover gamer */
 .home-card:hover {
   transform: translateY(-4px);
   box-shadow:
