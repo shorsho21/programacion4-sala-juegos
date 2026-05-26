@@ -2,50 +2,53 @@
 
   <div class="home-card text-center">
 
-    <!-- ⏳ Loading -->
+    <!-- Loading -->
     @if (loading()) {
       <p class="text-muted">Cargando...</p>
     }
 
-    <!-- 👤 LOGUEADO -->
+    <!-- LOGUEADO -->
     @if (!loading() && user()) {
 
-      <h1 class="mb-3">🎮Bienvenido {{ profile()?.nombre }} {{ profile()?.apellido }}🎮</h1>
+      <h1 class="mb-3">
+        🎮 Bienvenido {{ profile()?.nombre }} {{ profile()?.apellido }} 🎮
+      </h1>
 
       <p class="text-white mb-4">
-        Estás logueado como {{ profile()?.nombre }} {{ profile()?.apellido }}
+        Estás logueado como {{ profile()?.nombre }}
       </p>
 
-      <!-- 🚪 LOGOUT -->
+      <!-- LOGOUT -->
       <button class="btn btn-danger w-100 mb-4" (click)="cerrarSesion()">
         Cerrar sesión
       </button>
 
-      <hr />
+      <hr class="text-white" />
 
       <h5 class="mb-3">🎮 Juegos disponibles</h5>
 
       <div class="d-grid gap-3">
 
-        <button class="btn btn-dark" (click)="irAJuego('/game1')">
-          🎯 Juego 1
+        <button type="button" class="btn btn-dark" (click)="irAJuego('/ahorcado')">
+          🪢 Ahorcado
         </button>
 
-        <button class="btn btn-dark" (click)="irAJuego('/game2')">
-          🧠 Juego 2
+        <button type="button" class="btn btn-dark" (click)="irAJuego('/mayor-menor')">
+          🃏 Mayor o Menor
         </button>
 
-        <button class="btn btn-dark" (click)="irAJuego('/listado')">
-          📋 Listado
+        <button type="button" class="btn btn-dark" (click)="irAJuego('/chat')">
+          💬 Chat global
         </button>
 
       </div>
+
     }
 
-    <!-- 🚫 NO LOGUEADO -->
+    <!-- NO LOGUEADO -->
     @if (!loading() && !user()) {
 
-      <h1 class="mb-3"> 🎮Bienvenido🎮</h1>
+      <h1 class="mb-3">🎮 Bienvenido 🎮</h1>
 
       <p class="text-white mb-4">
         Iniciá sesión o registrate para continuar
@@ -53,15 +56,16 @@
 
       <div class="d-grid gap-3">
 
-        <button class="btn btn-dark" routerLink="/login">
+        <button type="button" class="btn btn-dark" (click)="irAJuego('/login')">
           Iniciar sesión
         </button>
 
-        <button class="btn btn-outline-dark" routerLink="/registro">
+        <button type="button" class="btn btn-outline-dark" (click)="irAJuego('/registro')">
           Registrarse
         </button>
 
       </div>
+
     }
 
   </div>
