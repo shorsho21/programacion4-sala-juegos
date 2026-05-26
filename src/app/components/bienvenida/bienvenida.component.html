@@ -19,7 +19,7 @@
       </p>
 
       <!-- LOGOUT -->
-      <button class="btn btn-danger w-100 mb-4" (click)="cerrarSesion()">
+      <button type="button" class="btn btn-danger w-100 mb-4" (click)="cerrarSesion()">
         Cerrar sesión
       </button>
 
@@ -37,8 +37,22 @@
           🃏 Mayor o Menor
         </button>
 
+        <button type="button" class="btn btn-dark" (click)="irAJuego('/preguntados')">
+          ❓ Preguntados
+        </button>
+
+        <button type="button" class="btn btn-dark" (click)="irAJuego('/wordle')">
+          🎯 Wordle
+        </button>
+
         <button type="button" class="btn btn-dark" (click)="irAJuego('/chat')">
           💬 Chat global
+        </button>
+
+        <hr class="text-white" />
+
+        <button type="button" class="btn btn-outline-light" (click)="irAJuego('/resultados')">
+          📊 Ver resultados
         </button>
 
       </div>

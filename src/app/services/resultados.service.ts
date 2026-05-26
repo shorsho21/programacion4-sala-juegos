@@ -2,44 +2,53 @@ import { Injectable } from '@angular/core';
 import { supabase } from '../supabase.client';
 
 @Injectable({
-providedIn:'root'
+  providedIn: 'root'
 })
+export class ResultadosService {
 
-export class ResultadosService{
+  // 💾 guardar resultado
+  async guardarResultado(resultado: any) {
 
-async guardarResultado(
-resultado:any
-){
+    const { data, error } = await supabase
+      .from('resultados')
+      .insert([resultado]);
 
-const {
+    if (error) {
+      console.log('Error insertando resultado:', error);
+      return null;
+    }
 
-error
+    return data;
+  }
 
-}
+  // 📊 obtener todos los resultados
+  async obtenerResultados() {
 
-=
+    const { data, error } = await supabase
+      .from('resultados')
+      .select('*');
 
-await supabase
+    if (error) {
+      console.log('Error obteniendo resultados:', error);
+      return [];
+    }
 
-.from(
-'resultados'
-)
+    return data;
+  }
 
-.insert(
-resultado
-);
+  // 🏆 (OPCIONAL PRO) obtener ordenados por puntaje
+  async obtenerResultadosOrdenados() {
 
+    const { data, error } = await supabase
+      .from('resultados')
+      .select('*')
+      .order('puntaje', { ascending: false });
 
-if(
-error
-){
+    if (error) {
+      console.log('Error obteniendo ordenados:', error);
+      return [];
+    }
 
-console.log(
-error
-);
-
-}
-
-}
-
+    return data;
+  }
 }

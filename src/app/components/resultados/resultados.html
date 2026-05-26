@@ -1,0 +1,97 @@
+<section class="resultados-container">
+
+  <h1 class="title">📊 Resultados Globales</h1>
+
+  @if (loading()) {
+    <p class="loading">Cargando resultados...</p>
+  }
+
+  @if (!loading()) {
+
+    <!-- 🪢 AHORCADO -->
+    <div class="tabla-card">
+      <h2>🪢 Ahorcado</h2>
+      <table>
+        <tr>
+          <th>Usuario</th>
+          <th>Puntaje</th>
+          <th>Errores</th>
+          <th>Tiempo</th>
+        </tr>
+
+        @for (r of ahorcado(); track r) {
+          <tr>
+            <td>{{ r.usuario }}</td>
+            <td>{{ r.puntaje }}</td>
+            <td>{{ r.errores ?? 0 }}</td>
+            <td>{{ (r.tiempo ?? 0) + 's' }}</td>
+          </tr>
+        }
+      </table>
+    </div>
+
+    <!-- 🃏 MAYOR MENOR -->
+    <div class="tabla-card">
+      <h2>🃏 Mayor o Menor</h2>
+      <table>
+        <tr>
+          <th>Usuario</th>
+          <th>Puntaje</th>
+          <th>Tiempo</th>
+        </tr>
+
+        @for (r of mayorMenor(); track r) {
+          <tr>
+            <td>{{ r.usuario }}</td>
+            <td>{{ r.puntaje }}</td>
+            <td>{{ (r.tiempo ?? 0) + 's' }}</td>
+          </tr>
+        }
+      </table>
+    </div>
+
+    <!-- ❓ PREGUNTADOS -->
+    <div class="tabla-card">
+      <h2>❓ Preguntados</h2>
+      <table>
+        <tr>
+          <th>Usuario</th>
+          <th>Puntaje</th>
+          <th>Tiempo</th>
+        </tr>
+
+        @for (r of preguntados(); track r) {
+          <tr>
+            <td>{{ r.usuario }}</td>
+            <td>{{ r.puntaje }}</td>
+            <td>{{ (r.tiempo ?? 0) + 's' }}</td>
+          </tr>
+        }
+      </table>
+    </div>
+
+    <!-- 🎮 WORDLE -->
+    <div class="tabla-card">
+      <h2>🎮 Wordle</h2>
+      <table>
+        <tr>
+          <th>Usuario</th>
+          <th>Puntaje</th>
+          <th>Intentos</th>
+          <th>Tiempo</th>
+        </tr>
+
+        @for (r of wordle(); track r) {
+          <tr>
+            <td>{{ r.usuario }}</td>
+            <td>{{ r.puntaje }}</td>
+            <td>{{ r.intentos ?? 0 }}</td>
+            <td>{{ (r.tiempo ?? 0) + 's' }}</td>
+          </tr>
+        }
+      </table>
+    </div>
+
+  }
+
+</section>

@@ -1,0 +1,84 @@
+.resultados-container {
+  min-height: 100vh;
+  padding: 30px;
+  background: linear-gradient(180deg, #0b0b0f, #12121a);
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+/* 🏆 TÍTULO */
+.title {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 30px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* ⏳ loading */
+.loading {
+  text-align: center;
+  color: #aaa;
+}
+
+/* 📦 TARJETA DE TABLA */
+.tabla-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease;
+}
+
+.tabla-card:hover {
+  transform: scale(1.01);
+}
+
+/* 🎮 TITULOS DE CADA JUEGO */
+.tabla-card h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #b7b7ff;
+}
+
+/* 📊 TABLA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+/* 🔠 HEADER */
+th {
+  text-align: left;
+  padding: 12px;
+  font-size: 13px;
+  color: #9aa0ff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+}
+
+/* 📄 CELDAS */
+td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #e6e6e6;
+}
+
+/* ✨ HOVER DE FILA */
+tr:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transition: 0.2s;
+}
+
+/* 🟣 EFECTO GAMER SUAVE */
+.tabla-card:nth-child(odd) {
+  border-left: 3px solid #7c5cff;
+}
+
+.tabla-card:nth-child(even) {
+  border-left: 3px solid #00d4ff;
+}

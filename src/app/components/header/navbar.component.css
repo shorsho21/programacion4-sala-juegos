@@ -1,28 +1,62 @@
-.navbar {
-  background: #ffffff;
+.navbar-gamer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+
+  background: #0d0d0d;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.navbar-btn {
-  border-radius: 12px;
-  padding: 0.5rem 1rem;
+.navbar-container {
+  width: 90%;
+  max-width: 900px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+
+  text-decoration: none;
+  color: #fff;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  transition: 0.2s ease-in-out;
   font-weight: 500;
-  transition: all 0.2s ease-in-out;
-  border: 1px solid transparent;
 }
 
-.navbar-btn:hover {
-  background: #f3f4f6;
-  border-color: #e5e7eb;
+.nav-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 255, 200, 0.15);
+  border: 1px solid rgba(0, 255, 200, 0.4);
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.2);
 }
 
-.navbar-btn.active {
-  background: #111827;
-  color: #ffffff !important;
-  border-color: #111827;
+.logout {
+  background: rgba(255, 0, 80, 0.1);
+  border: 1px solid rgba(255, 0, 80, 0.3);
 }
 
-.navbar-toggler {
-  border: none;
-  outline: none;
-  box-shadow: none;
+.logout:hover {
+  background: rgba(255, 0, 80, 0.25);
+  box-shadow: 0 0 10px rgba(255, 0, 80, 0.3);
+}
+.nav-btn.active {
+  background: rgba(0, 255, 200, 0.25);
+  border: 1px solid rgba(0, 255, 200, 0.6);
+  box-shadow: 0 0 12px rgba(0, 255, 200, 0.35);
+  transform: translateY(-2px);
 }

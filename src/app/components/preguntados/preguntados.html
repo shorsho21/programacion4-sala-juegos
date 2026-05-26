@@ -1,0 +1,37 @@
+<section class="preg-container d-flex justify-content-center align-items-center min-vh-100 px-3">
+  <div class="preg-card text-center">
+    @if (!finalizado()) {
+      <h2 class="mb-3 title">🧠 Preguntados</h2>
+
+      <!-- PROGRESO -->
+      <p class="mb-3 text-muted">Pregunta {{ preguntaActualIndex() + 1 }} / {{ totalPreguntas }}</p>
+
+      <!-- PREGUNTA -->
+      <p class="question mb-4">
+        {{ decodeHtml(preguntaActual()?.question) }}
+      </p>
+
+      <!-- OPCIONES -->
+      <div class="d-grid gap-3">
+        @for (opcion of opciones(); track opcion) {
+          <button class="btn option-btn" (click)="elegir(opcion)" [disabled]="!!seleccionada()">
+            {{ decodeHtml(opcion) }}
+          </button>
+        }
+      </div>
+
+      <!-- SCORE -->
+      <div class="mt-4 stats">🎯 Aciertos: {{ aciertos() }} / {{ totalPreguntas }}</div>
+    }
+
+    @if (finalizado()) {
+      <h2 class="title mb-3">🎉 Juego terminado</h2>
+
+      <p class="stats mb-2">Puntaje final: {{ aciertos() }} / {{ totalPreguntas }}</p>
+
+      <p class="text-info fw-bold">⏱ Tiempo: {{ tiempoFinal() }}s</p>
+
+      <button class="btn restart-btn mt-3" (click)="reiniciar()">🔁 Volver a jugar</button>
+    }
+  </div>
+</section>

@@ -1,0 +1,70 @@
+.wordle-container {
+  background: radial-gradient(circle at top, #1a1a2e, #0f0f1a 60%, #0a0a12);
+  color: white;
+}
+
+.wordle-card {
+  padding: 2rem;
+  background: rgba(20, 20, 35, 0.9);
+  border-radius: 18px;
+  border: 1px solid rgba(120, 80, 255, 0.3);
+  box-shadow: 0 0 25px rgba(120, 80, 255, 0.3);
+}
+
+.row-word {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.letter-box {
+  width: 50px;
+  height: 50px;
+  margin: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2b2b3d;
+  border-radius: 8px;
+  font-weight: bold;
+  color: white;
+}
+
+.correcta {
+  background: #22c55e !important;
+}
+
+.presente {
+  background: #eab308 !important;
+}
+
+.incorrecta {
+  background: #ef4444 !important;
+}
+
+.keyboard {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+.key-btn {
+  background: #2b2b3d;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.key-btn:hover {
+  background: #7b2ff7;
+}
+
+.description {
+  color: #cfcfcf;
+  font-size: 14px;
+  opacity: 0.9;
+  padding: 0 10px;
+}
