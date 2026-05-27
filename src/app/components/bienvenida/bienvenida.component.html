@@ -4,7 +4,11 @@
 
     <!-- Loading -->
     @if (loading()) {
-      <p class="text-muted">Cargando...</p>
+
+      <p class="text-muted">
+        Cargando...
+      </p>
+
     }
 
     <!-- LOGUEADO -->
@@ -19,63 +23,144 @@
       </p>
 
       <!-- LOGOUT -->
-      <button type="button" class="btn btn-danger w-100 mb-4" (click)="cerrarSesion()">
+      <button
+      type="button"
+      class="btn btn-danger w-100 mb-4"
+      (click)="cerrarSesion()">
+
         Cerrar sesión
+
       </button>
 
-      <hr class="text-white" />
+      <hr class="text-white">
 
-      <h5 class="mb-3">🎮 Juegos disponibles</h5>
+      <h5 class="mb-3">
+        🎮 Juegos disponibles
+      </h5>
 
       <div class="d-grid gap-3">
 
-        <button type="button" class="btn btn-dark" (click)="irAJuego('/ahorcado')">
+        <button
+        type="button"
+        class="btn btn-dark"
+        (click)="irAJuego('/ahorcado')">
+
           🪢 Ahorcado
+
         </button>
 
-        <button type="button" class="btn btn-dark" (click)="irAJuego('/mayor-menor')">
+        <button
+        type="button"
+        class="btn btn-dark"
+        (click)="irAJuego('/mayor-menor')">
+
           🃏 Mayor o Menor
+
         </button>
 
-        <button type="button" class="btn btn-dark" (click)="irAJuego('/preguntados')">
+        <button
+        type="button"
+        class="btn btn-dark"
+        (click)="irAJuego('/preguntados')">
+
           ❓ Preguntados
+
         </button>
 
-        <button type="button" class="btn btn-dark" (click)="irAJuego('/wordle')">
+        <button
+        type="button"
+        class="btn btn-dark"
+        (click)="irAJuego('/wordle')">
+
           🎯 Wordle
+
         </button>
 
-        <button type="button" class="btn btn-dark" (click)="irAJuego('/chat')">
+        <button
+        type="button"
+        class="btn btn-dark"
+        (click)="irAJuego('/chat')">
+
           💬 Chat global
+
         </button>
 
-        <hr class="text-white" />
+        <hr class="text-white">
 
-        <button type="button" class="btn btn-outline-light" (click)="irAJuego('/resultados')">
-          📊 Ver resultados
+        <!-- SCORE -->
+
+        <button
+        type="button"
+        class="btn btn-outline-light"
+        (click)="irAJuego('/resultados')">
+
+          📊 Ver resultados Score
+
         </button>
+
+        <!-- ENCUESTA -->
+
+        <button
+        type="button"
+        class="btn btn-outline-light"
+        (click)="irAJuego('/encuesta')">
+
+          📝 Realizar encuesta
+
+        </button>
+
+
+        <!-- SOLO ADMIN -->
+
+        @if(esAdmin()){
+
+          <button
+          type="button"
+          class="btn btn-outline-light"
+          (click)="irAJuego('/resultado-encuesta')">
+
+            👑 📊 Ver resultado de encuestas
+
+          </button>
+
+        }
 
       </div>
 
     }
 
     <!-- NO LOGUEADO -->
+
     @if (!loading() && !user()) {
 
-      <h1 class="mb-3">🎮 Bienvenido 🎮</h1>
+      <h1 class="mb-3">
+        🎮 Bienvenido 🎮
+      </h1>
 
       <p class="text-white mb-4">
+
         Iniciá sesión o registrate para continuar
+
       </p>
 
       <div class="d-grid gap-3">
 
-        <button type="button" class="btn btn-dark" (click)="irAJuego('/login')">
+        <button
+        type="button"
+        class="btn btn-dark"
+        (click)="irAJuego('/login')">
+
           Iniciar sesión
+
         </button>
 
-        <button type="button" class="btn btn-outline-dark" (click)="irAJuego('/registro')">
+        <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="irAJuego('/registro')">
+
           Registrarse
+
         </button>
 
       </div>

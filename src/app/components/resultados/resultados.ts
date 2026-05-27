@@ -8,8 +8,9 @@ import { ResultadosService } from '../../services/resultados.service';
   templateUrl: './resultados.html',
   styleUrl: './resultados.css'
 })
+//inicio clase
 export class ResultadosComponent implements OnInit {
-
+  //inyecto los servicios
   resultadosService = inject(ResultadosService);
 
   loading = signal(true);
@@ -19,15 +20,17 @@ export class ResultadosComponent implements OnInit {
   preguntados = signal<any[]>([]);
   wordle = signal<any[]>([]);
 
+  //cargo los resultados al iniciar el componente
   async ngOnInit() {
     await this.cargarResultados();
     this.loading.set(false);
   }
 
   async cargarResultados() {
-
+    //obtengo los datos de resultados de los score
     const data = await this.resultadosService.obtenerResultados();
 
+    //ordena de mayor a menor cada juego segun el puntaje
     this.ahorcado.set(
       data.filter(r => r.juego === 'Ahorcado')
         .sort((a, b) => b.puntaje - a.puntaje)

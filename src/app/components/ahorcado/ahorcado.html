@@ -20,7 +20,7 @@
 
         </p>
 
-
+        <!-- palabra visible que se va revelando -->
         <div class="palabra-container">
 
             <h2 class="palabra">
@@ -31,16 +31,17 @@
 
         </div>
 
-
+        <!-- Teclado de letras -->
+         <!-- Si la letra ya fue seleccionada se desabilita -->
         <div class="teclado mt-4">
 
             @for(
             letra of abecedario;
             track letra
             ){
-
+                
             <button
-
+            
             class="btn letra-btn"
 
             [disabled]="
@@ -66,7 +67,7 @@
         @if(
         juegoTerminado()
         ){
-
+            <!-- panel de resultado -->
         <div class="mt-4 resultado-panel">
 
             @if(
@@ -102,7 +103,7 @@
             </p>
 
             }
-
+            <!-- tiempo final al terminar la partida -->
             <p>
 
                 ⏱ Tiempo:

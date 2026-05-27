@@ -1,0 +1,94 @@
+.encuesta-container {
+  background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+}
+
+.encuesta-card {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(20, 20, 35, 0.85);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  color: #fff;
+}
+
+.title {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #ddd;
+}
+
+/* INPUTS */
+.input-gamer {
+  background: #111827;
+  border: 1px solid #2d2d44;
+  color: #fff;
+}
+
+.input-gamer::placeholder {
+  color: #8b8b8b;
+}
+
+.input-gamer:focus {
+  border-color: #6d5efc;
+  box-shadow: 0 0 10px rgba(109,94,252,0.4);
+}
+
+/* DIVIDER */
+.divider-gamer {
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* RANGE */
+.range-gamer {
+  accent-color: #6d5efc;
+}
+
+.range-info {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+/* BADGE SCORE */
+.badge-score {
+  background: #6d5efc;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+/* RADIO GROUP */
+.radio-group {
+  background: rgba(17, 24, 39, 0.6);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #2d2d44;
+}
+
+/* radios */
+.form-check-input {
+  cursor: pointer;
+}
+
+.form-check-label {
+  color: #ddd;
+  cursor: pointer;
+}
+
+/* BOTÓN */
+.btn-submit {
+  background: linear-gradient(90deg, #6d5efc, #8b5cf6);
+  border: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(109,94,252,0.4);
+}

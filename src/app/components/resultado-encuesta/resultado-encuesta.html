@@ -1,0 +1,150 @@
+<section class="resultado-container">
+
+    <div class="container py-5">
+
+        <h1 class="text-center title mb-5">
+            📊 Resultados de Encuestas
+        </h1>
+
+        <!-- CARDS -->
+
+        <div class="row g-4 mb-5">
+
+            <!-- ⭐ PUNTUACIÓN -->
+
+            <div class="col-md-4">
+
+                <div class="resultado-card">
+
+                    <h3>⭐ Puntaje general</h3>
+
+                    <div class="resultado-numero">
+                        {{ promedioPuntuacion() }}
+                    </div>
+
+                    <p>
+                        Promedio de puntuación de los usuarios
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ⚡ DIFICULTAD -->
+
+            <div class="col-md-4">
+
+                <div class="resultado-card">
+
+                    <h3>⚡ Dificultad general</h3>
+
+                    <div class="resultado-numero">
+                        {{ dificultadMasElegida() }}
+                    </div>
+
+                    <p>
+                        Dificultad más elegida
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 🎮 JUEGO -->
+
+            <div class="col-md-4">
+
+                <div class="resultado-card">
+
+                    <h3>🏆 Juego favorito</h3>
+
+                    <div class="resultado-numero">
+                        {{ juegoFavorito() }}
+                    </div>
+
+                    <p>
+                        Juego más votado
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TABLA -->
+
+        <div class="tabla-card">
+
+            <h3 class="mb-4">
+                📋 Respuestas de usuarios
+            </h3>
+
+            <div class="table-responsive">
+
+                <table class="table table-dark table-hover align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Teléfono</th>
+                            <th>Puntuación</th>
+                            <th>Juego</th>
+                            <th>Dificultad</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @if(encuestas().length===0){
+
+                            <tr>
+
+                                <td colspan="6" class="text-center py-4">
+
+                                    No hay encuestas disponibles
+
+                                </td>
+
+                            </tr>
+
+                        }
+
+                        @else {
+
+                            @for(encuesta of encuestas(); track $index){
+
+                            <tr>
+
+                                <td>{{ encuesta.nombre_apellido }}</td>
+                                <td>{{ encuesta.edad }}</td>
+                                <td>{{ encuesta.telefono }}</td>
+                                <td>{{ encuesta.puntuacion }}</td>
+                                <td>{{ encuesta.juego_favorito }}</td>
+                                <td>{{ encuesta.dificultad }}</td>
+
+                            </tr>
+
+                            }
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
