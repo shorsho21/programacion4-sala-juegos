@@ -2,38 +2,20 @@ import { Injectable } from '@angular/core';
 import { supabase } from '../supabase.client';
 
 @Injectable({
-providedIn:'root'
+  providedIn: 'root',
 })
-export class ChatService{
+export class ChatService {
+  async enviarMensaje(data: any) {
+    return await supabase.from('chat').insert(data);
+  }
 
-async enviarMensaje(data:any){
+  async obtenerMensajes() {
+    const { data, error } = await supabase.from('chat').select('*').order('fecha', {
+      ascending: true,
+    });
 
-return await supabase
-.from('chat')
-.insert(data);
+    if (error) throw error;
 
-}
-
-
-async obtenerMensajes(){
-
-const {data,error}=
-
-await supabase
-.from('chat')
-.select('*')
-.order(
-'fecha',
-{
-ascending:true
-}
-);
-
-if(error)
-throw error;
-
-return data;
-
-}
-
+    return data;
+  }
 }

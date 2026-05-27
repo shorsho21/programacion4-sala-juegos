@@ -1,0 +1,197 @@
+/* Fondo */
+
+.resultado-container{
+
+    min-height:100vh;
+
+    width:100%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0a0a12,
+        #121220,
+        #1a1a2e
+    );
+
+}
+
+
+/* Título */
+
+.title{
+
+    color:white;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-shadow:
+    0 0 10px rgba(0,217,255,.8);
+
+}
+
+
+/* Tarjetas */
+
+.resultado-card{
+
+    background:rgba(15,15,25,.95);
+
+    border:1px solid rgba(0,217,255,.15);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    min-height:260px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    transition:.35s;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.5);
+
+}
+
+
+/* Hover */
+
+.resultado-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 15px rgba(0,217,255,.5),
+    0 0 35px rgba(0,217,255,.2);
+
+}
+
+
+/* Título tarjeta */
+
+.resultado-card h3{
+
+    color:white;
+
+    margin-bottom:20px;
+
+}
+
+
+/* Resultado grande */
+
+.resultado-numero{
+
+    color:#00d9ff;
+
+    font-size:2.8rem;
+
+    font-weight:bold;
+
+    margin:20px 0;
+
+    text-shadow:
+    0 0 12px rgba(0,217,255,.8);
+
+}
+
+
+/* Texto */
+
+.resultado-card p{
+
+    color:rgba(255,255,255,.7);
+
+}
+
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.resultado-card{
+
+min-height:auto;
+
+padding:25px;
+
+}
+
+.resultado-numero{
+
+font-size:2rem;
+
+}
+
+}
+
+/* Tabla */
+
+.tabla-card{
+
+margin-top:50px;
+
+background:rgba(15,15,25,.95);
+
+border-radius:20px;
+
+padding:30px;
+
+border:1px solid rgba(0,217,255,.15);
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.5);
+
+}
+
+
+.tabla-card h3{
+
+color:white;
+
+}
+
+
+.table{
+
+margin:0;
+
+border-radius:10px;
+
+overflow:hidden;
+
+}
+
+
+.table thead{
+
+color:#00d9ff;
+
+}
+
+
+.table tbody tr{
+
+transition:.3s;
+
+}
+
+
+.table tbody tr:hover{
+
+transform:scale(1.01);
+
+}

@@ -4,9 +4,9 @@
       <h2 class="mb-3 title">🧠 Preguntados</h2>
 
       <!-- PROGRESO -->
-      <p class="mb-3 text-muted">Pregunta {{ preguntaActualIndex() + 1 }} / {{ totalPreguntas }}</p>
+      <p class="mb-3 text-white">Pregunta {{ preguntaActualIndex() + 1 }} / {{ totalPreguntas }}</p>
 
-      <!-- PREGUNTA -->
+      <!-- PREGUNTA decodificada por los caracteres especiales-->
       <p class="question mb-4">
         {{ decodeHtml(preguntaActual()?.question) }}
       </p>
@@ -14,6 +14,7 @@
       <!-- OPCIONES -->
       <div class="d-grid gap-3">
         @for (opcion of opciones(); track opcion) {
+          <!-- disabled si la opcion ya fue seleccionada -->
           <button class="btn option-btn" (click)="elegir(opcion)" [disabled]="!!seleccionada()">
             {{ decodeHtml(opcion) }}
           </button>
@@ -23,7 +24,7 @@
       <!-- SCORE -->
       <div class="mt-4 stats">🎯 Aciertos: {{ aciertos() }} / {{ totalPreguntas }}</div>
     }
-
+    <!-- pantalla final con resultado y boton para reiniciar el juego -->
     @if (finalizado()) {
       <h2 class="title mb-3">🎉 Juego terminado</h2>
 

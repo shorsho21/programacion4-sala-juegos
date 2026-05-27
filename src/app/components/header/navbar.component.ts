@@ -18,10 +18,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
 
-    // 🔥 estado inicial
+    //  estado inicial
     this.refreshUser();
 
-    // 🔥 ESCUCHA REAL DE SUPABASE
+    //  ESCUCHA REAL DE SUPABASE
     supabase.auth.onAuthStateChange((_event, session) => {
       this.user.set(session?.user ?? null);
     });

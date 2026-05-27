@@ -6,7 +6,7 @@ import { supabase } from '../supabase.client';
 })
 export class ResultadosService {
 
-  // 💾 guardar resultado
+  // guardar resultado
   async guardarResultado(resultado: any) {
 
     const { data, error } = await supabase
@@ -21,7 +21,7 @@ export class ResultadosService {
     return data;
   }
 
-  // 📊 obtener todos los resultados
+  //  obtener todos los resultados
   async obtenerResultados() {
 
     const { data, error } = await supabase
@@ -36,7 +36,7 @@ export class ResultadosService {
     return data;
   }
 
-  // 🏆 (OPCIONAL PRO) obtener ordenados por puntaje
+  //  obtener ordenados por puntaje
   async obtenerResultadosOrdenados() {
 
     const { data, error } = await supabase

@@ -75,4 +75,19 @@ export class AuthService {
 
     return data;
   }
+
+  //GET DATA USER
+  async getUserData(){
+    return await supabase.auth.getSession();
+  }
+
+  //GET USER BY ID
+  async getUserById(id: string){
+    return await supabase.from("usuarios").select("*").eq("id",id).single();
+  }
+
+  async getUserDb(){
+    return await supabase.auth.getUser();
+
+  }
 }

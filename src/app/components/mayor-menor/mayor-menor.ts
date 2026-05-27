@@ -5,6 +5,9 @@ import { ResultadosService } from '../../services/resultados.service';
 import { AuthService } from '../../services/auth.service';
 import { supabase } from '../../supabase.client';
 
+import { MayorMenorService } from '../../services/mayor.menor.service';
+
+//inicio el componente
 @Component({
   selector: 'app-mayor-menor',
   standalone: true,
@@ -12,13 +15,16 @@ import { supabase } from '../../supabase.client';
   templateUrl: './mayor-menor.html',
   styleUrl: './mayor-menor.css',
 })
-
+//defino la clase
 export class MayorMenorComponent {
-
+  //inyecto los servicios
   resultadosService = inject(ResultadosService);
   authService = inject(AuthService);
+  mayorMenorService = inject(MayorMenorService);
+
   api = inject(HttpClient);
 
+  //defino usuario y signals
   usuario: any = null;
 
   deckId = signal('');
@@ -26,7 +32,7 @@ export class MayorMenorComponent {
   aciertos = signal(0);
   terminado = signal(false);
 
-  // ⏱️ NUEVO: tiempo inicio
+  //  tiempo inicio
   tiempoInicio = Date.now();
 
   valores: any = {
@@ -46,12 +52,14 @@ export class MayorMenorComponent {
   };
 
   constructor() {
+    //cargo usuario y inicio el juego
     this.cargarUsuario();
     this.iniciarJuego();
   }
 
   async cargarUsuario() {
-    const { data } = await supabase.auth.getUser();
+    const { data } = await this.authService.getUserDb();
+    console.log(data);
 
     const email = data.user?.email;
 
@@ -61,66 +69,80 @@ export class MayorMenorComponent {
   }
 
   iniciarJuego() {
-    this.tiempoInicio = Date.now(); // ⏱️ reset tiempo
+    this.tiempoInicio = Date.now(); // reset tiempo
 
-    this.api.get<any>(
-      'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'
-    ).subscribe(data => {
-      this.deckId.set(data.deck_id);
-      this.sacarCarta();
-    });
+    //obtengo un mazo de cartas y saco la primera carta
+    this.mayorMenorService.crearMazo()
+      .subscribe(data => {
+
+        //seteo el id del mazo y saco la primera carta
+        this.deckId.set(data.deck_id);
+
+        this.sacarCarta();
+      });
   }
 
+  //saco una carta del mazo usando el service y la seteo en el signal cartaActual
   sacarCarta() {
-    this.api.get<any>(
-      `https://deckofcardsapi.com/api/deck/${this.deckId()}/draw/?count=1`
-    ).subscribe(data => {
-      this.cartaActual.set(data.cards[0]);
-    });
+    this.mayorMenorService.sacarCarta(this.deckId())
+      .subscribe(data => {
+
+        //agarro la primera carta del resultado y la seteo como carta actual
+        this.cartaActual.set(data.cards[0]);
+
+      });
   }
 
   elegir(eleccion: 'mayor' | 'menor') {
+    //pido una nueva carta del mazo
+    this.mayorMenorService.sacarCarta(this.deckId())
+      .subscribe(data => {
 
-    this.api.get<any>(
-      `https://deckofcardsapi.com/api/deck/${this.deckId()}/draw/?count=1`
-    ).subscribe(data => {
+        //la carga en nueva carta
+        const nuevaCarta = data.cards[0];
 
-      const nuevaCarta = data.cards[0];
+        //comparo valor de la carta nuevo con la actual
+        const actual = this.valores[this.cartaActual().value];
+        const siguiente = this.valores[nuevaCarta.value];
 
-      const actual = this.valores[this.cartaActual().value];
-      const siguiente = this.valores[nuevaCarta.value];
+        let acerto = false;
 
-      let acerto = false;
+        if (eleccion === 'mayor' && siguiente > actual) acerto = true;
+        if (eleccion === 'menor' && siguiente < actual) acerto = true;
 
-      if (eleccion === 'mayor' && siguiente > actual) acerto = true;
-      if (eleccion === 'menor' && siguiente < actual) acerto = true;
+        if (acerto) {
 
-      if (acerto) {
-        this.aciertos.update(x => x + 1);
-        this.cartaActual.set(nuevaCarta);
-      } else {
-        this.terminado.set(true);
-        this.guardarResultado();
-      }
+          //aumenta el contador de aciertos, setea la nueva carta como actual
+          this.aciertos.update(x => x + 1);
+          this.cartaActual.set(nuevaCarta);
 
-    });
+        } else {
 
+          //si se equivoca, finaliza el juego, se guarda resultado en la base de datos
+          this.terminado.set(true);
+          this.guardarResultado();
+
+        }
+
+      });
   }
 
-  // ⏱️ NUEVO: calcular tiempo
+  //  calcular tiempo
   tiempoFinal() {
     return Math.floor((Date.now() - this.tiempoInicio) / 1000);
   }
 
+  //guardar resultado en la base de datos usando el servicio resultadosService
   async guardarResultado() {
 
+    //si no hay usuario return
     if (!this.usuario) return;
 
     await this.resultadosService.guardarResultado({
       usuario: this.usuario.nombre + ' ' + this.usuario.apellido,
       juego: 'Mayor-Menor',
       puntaje: this.aciertos(),
-      tiempo: this.tiempoFinal(), // ✅ AHORA SÍ
+      tiempo: this.tiempoFinal(),
       fecha: new Date()
     });
 

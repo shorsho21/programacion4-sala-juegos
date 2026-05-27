@@ -6,7 +6,7 @@
   font-family: Arial, sans-serif;
 }
 
-/* 🏆 TÍTULO */
+/*  TÍTULO */
 .title {
   text-align: center;
   font-size: 34px;
@@ -15,13 +15,13 @@
   letter-spacing: 1px;
 }
 
-/* ⏳ loading */
+/*  loading */
 .loading {
   text-align: center;
   color: #aaa;
 }
 
-/* 📦 TARJETA DE TABLA */
+/*  TARJETA DE TABLA */
 .tabla-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -44,14 +44,14 @@
   color: #b7b7ff;
 }
 
-/* 📊 TABLA */
+/*  TABLA */
 table {
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
 }
 
-/* 🔠 HEADER */
+/*  HEADER */
 th {
   text-align: left;
   padding: 12px;
@@ -61,20 +61,20 @@ th {
   text-transform: uppercase;
 }
 
-/* 📄 CELDAS */
+/*  CELDAS */
 td {
   padding: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   color: #e6e6e6;
 }
 
-/* ✨ HOVER DE FILA */
+/*  HOVER DE FILA */
 tr:hover {
   background: rgba(255, 255, 255, 0.06);
   transition: 0.2s;
 }
 
-/* 🟣 EFECTO GAMER SUAVE */
+/* EFECTO GAMER SUAVE */
 .tabla-card:nth-child(odd) {
   border-left: 3px solid #7c5cff;
 }

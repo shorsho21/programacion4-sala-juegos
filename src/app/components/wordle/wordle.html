@@ -18,7 +18,7 @@
         <div class="row-word">
 
           @for (letra of intento.palabra.split(''); track $index) {
-
+            <!-- depende del estado de la letra se pinta de verde, amarillo,rojo -->
             <span
               class="letter-box"
               [class.correcta]="intento.resultado[$index] === 'correcta'"
@@ -36,7 +36,7 @@
 
     </div>
 
-    <!-- INTENTO ACTUAL -->
+    <!-- INTENTO ACTUAL, muestra los inputs actuales -->
     <div class="row-word mb-3">
 
       @for (i of [0,1,2,3,4]; track i) {
